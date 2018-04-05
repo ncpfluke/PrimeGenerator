@@ -1,0 +1,82 @@
+<html>
+
+<script>
+
+
+x = 2;
+
+
+function display(prime)
+//Receives whether or not x is prime, displays the value of x, if its prime
+
+{
+if(prime == 1)
+	{
+	document.getElementById("number").innerHTML = x;
+	}
+}
+
+
+function start()
+//starts a timer to cycle throu numbers and test if they are prime.
+{
+
+timer = setInterval(testprime, 500); //change the 500 to 100 to make it test 10 numbers a second instead of 2
+
+}
+
+
+function stop()
+//stops the testprime function from being repeatedly called therefore halting program
+{
+clearInterval(timer)
+
+}
+
+
+function testprime()
+//test whether x is prime or not and sends 1 for prime and 0 for not priome to the display function
+{
+x++;
+var prime = 1;
+	
+	for(var i = 2; i <= Math.ceil(Math.sqrt(x)); i++)
+	{
+		if(x%i==0)
+		{
+			prime = 0;
+		}	
+	}
+	
+	/*
+Uncomment this to make program display primes every 1/2 second, 
+instead of Testing a number every half a second (more pleasing visually)
+	if(prime == 0)
+	{
+	testprime();
+	}
+	*/
+
+display(prime);
+
+}
+
+
+
+
+
+
+
+
+</script>
+<body>
+<h1 id="number">1</h1>
+<button onClick="start()">Start</button>
+<button onClick="stop()">Stop</button>
+
+
+</body>
+
+
+
+</html>
