@@ -3,77 +3,81 @@
 <script>
 
 
-x = 2;
-
+x = 1;
+primes = [2];//the way the program is written, it will  not display 2 as prime, so we manually put it in
 
 function display(prime)
-//Receives whether or not x is prime, displays the value of x, if its prime
+//Receives whether or not x is prime, displays the value of x, if its prime (1=prime)
 
 {
-if(prime == 1)
-	{
+if(prime == 1){
 	document.getElementById("number").innerHTML = x;
+	primes.push(x); //if x is prime, it adds it to an array of primes
+	//alert(primes);
 	}
 }
 
 
 function start()
-//starts a timer to cycle throu numbers and test if they are prime.
+//starts a timer to cycle through numbers and test if they are prime.
 {
-
-timer = setInterval(testprime, 500); //change the 500 to 100 to make it test 10 numbers a second instead of 2
-
+timer = setInterval(testprime, 20); //change the 500 to 100 to make it display/test 10 numbers a second instead of 2
 }
 
 
 function stop()
 //stops the testprime function from being repeatedly called therefore halting program
 {
-clearInterval(timer)
-
+clearInterval(timer);
 }
 
 
 function testprime()
-//test whether x is prime or not and sends 1 for prime and 0 for not priome to the display function
+//test whether x is prime or not and sends 1 for prime and 0 for not prime to the display function
 {
-x++;
+
+x+=2;//adds 2 to x, this way it only tests odd numbers, bc even numbers arent prime (except 2)
+
+var val = 0;//val is the index val of a prime number in the primes array that is closest to the sqrt(x) without being less than sqrt(x)
 var prime = 1;
 	
-	for(var i = 2; i <= Math.ceil(Math.sqrt(x)); i++)
+	for(var h = 0; h <= primes.length; h++){	//this loop looks for the ideal value of val
+		if(primes[h] >= Math.ceil(Math.sqrt(x))){
+			val = h;
+			break;
+		}
+	}
+	
+	for(var i = 0; i <= val; i++) // this checks all prime numbers between 2 and val to see if x is divisible by any of them (proving its prime or not)
 	{
-		if(x%i==0)
+		if(x%primes[i]==0)
 		{
-			prime = 0;
+			prime = 0; // if x fails the divisibity test, then it gets told its not prime :p
 		}	
 	}
 	
-	/*
-Uncomment this to make program display primes every 1/2 second, 
-instead of Testing a number every half a second (more pleasing visually)
+	
+//comment this to make program to test numbers every 1/2 second, 
+//instead of displaying a number every half a second (less pleasing visually)
+
 	if(prime == 0)
 	{
 	testprime();
 	}
-	*/
+//------------------------------------------------------------
 
-display(prime);
+display(prime); //tells the prime function whether or not to display the current x value and add it to the known list of primes
 
 }
 
 
-
-
-
-
-
-
 </script>
 <body>
-<h1 id="number">1</h1>
-<button onClick="start()">Start</button>
-<button onClick="stop()">Stop</button>
-
+<center>
+<h1 id="number" style="font-size:50px;">2</h1>
+<button onClick="start()" style="width:150px; height:40px; font-size:20px;">Start</button>
+<button onClick="stop()" style="width:150px; height:40px; font-size:20px;">Stop</button>
+</center>
 
 </body>
 
