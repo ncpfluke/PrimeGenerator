@@ -30,9 +30,6 @@ def testprime():
         if primes[h] >= math.ceil(math.sqrt(x)):
             val = h
             break
-#---------------------------------------------------------------------------------FINISH TRANSLATING HERE-----------------------------------------------------------------------------------------------
-
-
 
     for i in range(val + 1):# this checks all prime numbers between 2 and val to see if x is divisible by any of them (proving its prime or not )
         if x % primes[i] == 0:
